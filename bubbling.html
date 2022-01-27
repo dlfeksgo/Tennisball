@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .selected {
+      background-color: yellowgreen;
+    }
+  </style>
+  <body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+    </ul>
+  </body>
+  <script>
+    // //<li>태그를 전부 찾아다가 lis에 담았다.
+    // //lis는 Nodelist로 배열형식으로 담겨있다.
+    // const lis = document.querySelectorAll('li');
+
+    // //forEach 구문은 어떤 배열에서 데이터를 뽑아다가 반복문 돌리는 것이다.
+    // lis.forEach(function (li) {
+    //   //forEach로 받아온 배열 안의 데이터를 li 인자로 받아다가 각 인자에 클릭 이벤트를 적용한다.
+    //   //이때 실행될 기능은 모든 li들의 classlist 안에 selected라는 클래스를 추가한다는 뜻.
+    //   li.addEventListener('click', function () {
+    //     li.classList.add('selected');
+    //   });
+    // });
+
+    const ul = document.querySelector('ul');
+    ul.addEventListener('click', function (e) {
+      if (e.target.tagName == 'LI') {
+        e.target.classList.add('selected');
+      }
+    });
+  </script>
+</html>
