@@ -7,6 +7,8 @@ const addBtn = document.querySelector('.addBtn');
 // 3. 부모 리스트 안에 생성된 리스트를 추가한다.
 // 4. 인풋을 초기화 한다.
 
+//github test
+
 function onAdd() {
   const text = input.value;
 
