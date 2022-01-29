@@ -26,11 +26,12 @@ let id = 0;
 function createItem(text) {
   const newItem = document.createElement('li');
   newItem.setAttribute('class', 'item__row');
+  newItem.setAttribute('data-id', id);
   newItem.innerHTML = `
-    <div class="item" data-id=${id}>
+    <div class="item">
       <span class="item__name">${text}</span>
       <button class="item__delete">
-          <i class="fas fa-trash-alt" ${id}></i>
+          <i class="fas fa-trash-alt" data-id=${id}></i>
       </button>
     </div>
     <div class="div__line"></div>
@@ -50,7 +51,10 @@ input.addEventListener('keypress', function (e) {
 });
 
 newList.addEventListener('click', function (e) {
-  if (e.target.nodeName === 'I') {
-    console.log('hey~');
+  const id = e.target.dataset.id;
+  if (id){
+  const deleteItem = document.querySelector(`.item__row[data-id="${id}"]`);
+    deleteItem.remove();
   }
+  
 });
