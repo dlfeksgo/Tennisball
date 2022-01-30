@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/Carrot2/main.js"></script>
+    <script src="/Carrot2/main.js" defer></script>
     <link rel="stylesheet" href="/Carrot2/style.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous"/>
     <title>Document</title>
@@ -16,11 +16,15 @@
             <span class="game_timer">0:0</span>
             <span class="game_score">9</span>
         </header>
-        <section class="game_zone"></section>
+        <section class="game_zone">
+            <div class="carrot obj_hide"></div>
+            <div class="bug obj_hide"></div>
+        </section>
     </section>
-    <section class="pop-up">
+    <section class="pop-up pop-up_hide">
         <button class="pop-up_refresh"><i class="fas fa-redo-alt"></i></button>
         <span class="pop-up_message">Clear!</span>
     </section>
+
 </body>
 </html>
