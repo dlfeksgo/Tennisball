@@ -47,11 +47,13 @@ body {
 .game_timer {
   background-color: white;
   width: 100px;
+  height: 35px;
   border-radius: 10px;
   border: 3px solid black;
   text-align: center;
   font-size: 32px;
   margin-top: 5px;
+  visibility: hidden;
 }
 
 .game_score {
@@ -64,6 +66,7 @@ body {
   border: 2px solid black;
   border-radius: 50%;
   text-align: center;
+  visibility: hidden;
 }
 
 .pop-up {

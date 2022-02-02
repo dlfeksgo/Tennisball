@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="time">
+    <div class="count"></div>
+    <button class="start">Start</button>
+    <button class="stop">stop</button>
+    <button class="timeout">CountDown</button>
+</div>
+</body>
+<script>
+    const countDisplay = document.querySelector('.count');
+    const startBtn = document.querySelector('.start');
+    const stopBtn = document.querySelector('.stop');
+    const timeBtn = document.querySelector('.timeout');
+
+    let time = 5;
+    let play;
+
+    //play는 이미 let으로 선언한 상태 
+    //선언된 play 안에 setInterval 함수를 적용한다. 
+    //1초마다 countDown 함수가 호출된다.
+    startBtn.addEventListener('click', function(){
+        countDisplay.innerHTML = time;
+        play = setInterval(countDown, 1000);
+    })
+
+stopBtn.addEventListener('click', stop);
+
+function countDown(){
+    if(time > 0){
+        --time;
+        countDisplay.innerHTML = time;
+    }
+}
+
+function stop(){
+if(time > 5){
+    clearInterval(play);
+}
+}
+
+timeBtn.addEventListener('click', function(){
+   setTimeout(function(){
+       if(time > 1){
+           time--;
+           countDisplay.innerHTML = time;
+       }
+   })
+});
+   </script>
+</html>
