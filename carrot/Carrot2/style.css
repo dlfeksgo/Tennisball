@@ -104,3 +104,21 @@ body {
 .pop-up_hide {
   display: none;
 }
+
+.carrot {
+  transition: all 300ms ease-in;
+  cursor: pointer;
+}
+
+.carrot:hover {
+  transform: scale(1.1);
+}
+
+.bug {
+  transition: all 300ms ease-in;
+  cursor: pointer;
+}
+
+.bug:hover {
+  transform: scale(1.1);
+}
