@@ -7,14 +7,14 @@ const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
 const GAME_DURATION_SEC = 5;
 
-const zone = document.querySelector(".game_zone");
+const zone = document.querySelector('.game_zone');
 const zoneRect = zone.getBoundingClientRect();
-const playBtn = document.querySelector(".game_play");
-const gameScore = document.querySelector(".game_score");
-const gameTimer = document.querySelector(".game_timer");
-const popUp = document.querySelector(".pop-up");
-
-const refreshBtn = document.querySelector(".pop-up_refresh");
+const playBtn = document.querySelector('.game_play');
+const gameScore = document.querySelector('.game_score');
+const gameTimer = document.querySelector('.game_timer');
+const popUp = document.querySelector('.pop-up');
+const refreshBtn = document.querySelector('.pop-up_refresh');
+const popUptext = document.querySelector('.pop-up_message');
 
 //상태에 대한 저장이 필요하다.
 //게임의 초기 상태를 기억하기 위함.
@@ -25,23 +25,37 @@ let timer = 0;
 
 //play 버튼 하나로 컨트롤 하는 것 말고, 버튼을 두개 둬서 하는 방법 코드 작성해보기
 //버튼을 두개 두면 if문이 필요하지 않을 수도 있음.
-playBtn.addEventListener("click", function () {
-  // const icon = document.querySelector('.fa-play');
+playBtn.addEventListener('click', function () {
   if (started) {
     stopGame();
   } else {
     startGame();
-    // icon.classList.add('fa-stop');
-    // icon.classList.remove('fa-play');
   }
-  started = !started; //예를 들어 started가 true면 stopGame이 실행되는데, stopGame이 되면 started가 false가 되어야 하니까
+  started = !started;
 });
 
-zone.addEventListener("click", function (e) {
-  if (e.target.className === "carrot") {
+zone.addEventListener('click', function (e) {
+  if (e.target.className === 'carrot') {
     e.target.remove();
-    gameScore.innerHTML = score++;
+    score++;
+    gameScore.innerHTML = CARROT_COUNT - score;
+    // updateScoreBoard();
+    if (CARROT_COUNT === score) {
+      finishGame(true);
+    }
+  } else if (e.target.className === 'bug') {
+    stopGame();
+    finishGame(false);
   }
+});
+
+// function updateScoreBoard() {
+//   gameScore.innerHTML = score;
+// }
+
+refreshBtn.addEventListener('click', function () {
+  popUp.classList.add('pop-up_hide');
+  startGame();
 });
 
 function startGame() {
@@ -56,15 +70,31 @@ function stopGame() {
   hiddenStopBtn();
 }
 
+function finishGame(win) {
+  popUp.classList.remove('pop-up_hide');
+  if (win) {
+    popUptext.innerHTML = 'Win😍';
+  } else {
+    popUptext.innerHTML = 'Lose😡';
+  }
+  stopGame();
+}
+
 function showTimerAndScore() {
-  gameTimer.style.visibility = "visible";
-  gameScore.style.visibility = "visible";
+  gameTimer.style.visibility = 'visible';
+  gameScore.style.visibility = 'visible';
 }
 
 function showStopBtn() {
-  const icon = document.querySelector(".fa-play");
-  icon.classList.add("fa-stop");
-  icon.classList.remove("fa-play");
+  const icon = document.querySelector('.fas');
+  icon.classList.add('fa-stop');
+  icon.classList.remove('fa-play');
+  playBtn.style.visibility = 'visible';
+}
+
+function hiddenStopBtn() {
+  playBtn.style.visibility = 'hidden';
+  popUp.classList.remove('pop-up_hide');
 }
 
 // if (started) {
@@ -109,6 +139,7 @@ function startGameTimer() {
   timer = setInterval(() => {
     if (nowTime <= 0) {
       clearInterval(timer);
+      finishGame(false);
       return;
     }
     updateTimer(--nowTime);
@@ -137,16 +168,12 @@ function stopGameTimer() {
   }
 }
 
-function hiddenStopBtn() {
-  playBtn.style.visibility = "hidden";
-  popUp.classList.remove("pop-up_hide");
-}
-
 function initGame() {
-  zone.innerHTML = ""; //play 버튼을 누를 때마다, zone.appenChild로 생성했던 HTML들을 공백처리 함.
+  zone.innerHTML = ''; //play 버튼을 누를 때마다, zone.appenChild로 생성했던 HTML들을 공백처리 함.
   gameScore.innerHTML = CARROT_COUNT;
-  addItem("carrot", CARROT_COUNT, "/img/carrot.png");
-  addItem("bug", BUG_COUNT, "/img/bug.png");
+  score = '';
+  addItem('carrot', CARROT_COUNT, '/img/carrot.png');
+  addItem('bug', BUG_COUNT, '/img/bug.png');
 }
 
 function addItem(className, count, imgPath) {
@@ -155,10 +182,10 @@ function addItem(className, count, imgPath) {
   const x2 = zoneRect.width - CARROT_SIZE;
   const y2 = zoneRect.height - CARROT_SIZE;
   for (let i = 0; i < count; i++) {
-    const item = document.createElement("img");
-    item.setAttribute("class", className);
-    item.setAttribute("src", imgPath);
-    item.style.position = "absolute";
+    const item = document.createElement('img');
+    item.setAttribute('class', className);
+    item.setAttribute('src', imgPath);
+    item.style.position = 'absolute';
     const x = randomNumber(x1, x2);
     const y = randomNumber(y1, y2);
     item.style.left = `${x}px`;
@@ -177,12 +204,8 @@ function randomNumber(min, max) {
 //   })
 // }
 
-refreshBtn.addEventListener("click", function () {
-  startGame();
-  popUp.classList.add("pop-up_hide");
-  playBtn.style.visibility = "visible";
-  playBtn.innerHTML = `<i class="fas fa-play"></i>`;
-});
+// playBtn.style.visibility = 'visible';
+
 // let nowTime = GAME_DURATION_SEC
 
 // zone.innerHTML = ''
