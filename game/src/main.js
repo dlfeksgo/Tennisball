@@ -28,7 +28,8 @@ let score = 0;
 let timer = undefined;
 
 const gameFinishBanner = new popUp();
-gameFinishBanner.setClickListener(() => {
+// gameFinishBanner.setClickListener(startGame);
+gameFinishBanner.addEventListener('click', function () {
   startGame();
 });
 
