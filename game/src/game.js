@@ -2,7 +2,33 @@ import Field from './field.js';
 import * as sound from './sound.js';
 
 //게임을 실행하는데에 관련된 애들
-export default class Game {
+
+export default class GameBuiler {
+  //withGameDuration이라는 함수를 이용해서 duration을 등록한다.
+  withGameDuration(duration) {
+    this.gameDuration = duration;
+    return this; //클래스 자체를 반환한다는 말이 이해가 안됨
+  }
+  withCarrotCount(num) {
+    this.carrotCount = num;
+    return this;
+  }
+  withBugCount(num) {
+    this.bugCount = num;
+    return this;
+  }
+
+  build() {
+    console.log(this);
+    return new Game(
+      this.gameDuration, //
+      this.carrotCount,
+      this.bugCount
+    );
+  }
+}
+
+class Game {
   constructor(gameDuration, carrotCount, bugCount) {
     this.gameDuration = gameDuration;
     this.carrotCount = carrotCount;

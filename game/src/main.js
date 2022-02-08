@@ -2,13 +2,19 @@
 
 import popUp from './popUp.js';
 import Game from './game.js';
+import GameBuiler from './game.js';
 
 const gameFinishBanner = new popUp();
 gameFinishBanner.setClickListener(() => {
   game.start();
 });
 
-const game = new Game(3, 2, 2);
+const game = new GameBuiler()
+  .withGameDuration(10)
+  .withCarrotCount(5)
+  .withBugCount(5)
+  .build();
+
 game.setGameStopListener((reason) => {
   console.log(reason);
   let message;
