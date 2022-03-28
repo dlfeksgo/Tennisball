@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="node"></div>
+		<script>
+			var node = document.getElementById('node');
+			var span = '<span> Hello World! </span>';
+			// node.insertAdjacentHTML('beforeend', span);
+			node.insertAdjacentHTML('beforebegin', 'beforebegin');
+			node.insertAdjacentHTML('afterbegin', 'afterbegin');
+			node.insertAdjacentHTML('beforeend', 'beforeend');
+			node.insertAdjacentHTML('afterend', 'afterend');
+		</script>
+	</body>
+</html>
